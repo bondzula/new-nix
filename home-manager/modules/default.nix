@@ -1,0 +1,31 @@
+{
+  atuin = import ./atuin.nix;
+  bat = import ./bat;
+  btop = import ./btop.nix;
+  chromium = import ./chromium.nix;
+  core = import ./core.nix;
+  direnv = import ./direnv.nix;
+  eza = import ./eza.nix;
+  fd = import ./fd.nix;
+  firefox = import ./firefox.nix;
+  fonts = import ./fonts.nix;
+  foot = import ./foot.nix;
+  fzf = import ./fzf.nix;
+  git = import ./git.nix;
+  gnupg = import ./gnupg.nix;
+  hyprland = import ./hyprland.nix;
+  lazygit = import ./lazygit.nix;
+  lf = import ./lf;
+  mpv = import ./mpv.nix;
+  nvim = import ./nvim.nix;
+  php = import ./php.nix;
+  ripgrep = import ./ripgrep.nix;
+  ssh = import ./ssh.nix;
+  starship = import ./starship.nix;
+  tmux = import ./tmux.nix;
+  wezterm = import ./wezterm;
+  yt-dlp = import ./yt-dlp.nix;
+  zellij = import ./zellij;
+  zoxide = import ./zoxide.nix;
+  zsh = import ./zsh.nix;
+}

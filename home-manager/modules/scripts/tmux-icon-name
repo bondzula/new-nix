@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+NAME=$1
+
+case $NAME in
+tmux)
+	echo ""
+	;;
+fish | zsh | bash | tcsh)
+	echo ""
+	;;
+vi | vim | nvim | lvim)
+	echo ""
+	;;
+lazygit | git | tig)
+	echo ""
+	;;
+node)
+	echo ""
+	;;
+ruby)
+	echo ""
+	;;
+go)
+	echo "ﳑ"
+	;;
+lf | lfcd)
+	echo ""
+	;;
+beam | beam.smp) # Erlang runtime
+	echo ""
+	;;
+rustc | rustup)
+	echo ""
+	;;
+Python)
+	echo ""
+	;;
+*)
+	echo "$NAME"
+	;;
+esac

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# save the result of the query to a variable
+selected=$(zoxide query -l | fzf --info hidden)
+
+# get the filename from the result
+filename=$(basename $selected)
+
+# create new zellij tab with the selected directory
+zellij action new-tab -c $selected -n $filename -l custom-default

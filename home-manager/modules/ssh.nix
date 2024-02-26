@@ -1,0 +1,2 @@
+# User configuration for ssh
+{ }

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Check if ZELLIJ_SESSION_NAME environment is not set
+if [ -z $ZELLIJ_SESSION_NAME ]; then
+  zellij
+fi
+
+zellij run -f -c -n "Open new tab" -- zellij-zoxide
