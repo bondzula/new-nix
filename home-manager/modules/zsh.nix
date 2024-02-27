@@ -28,19 +28,14 @@
 
     initExtra = ''
       # Setup NODE
-      eval "$(fnm env --use-on-cd)" # Load node manager
       path+=('/home/bondzula/.npm-packages/bin')
 
       export NODE_PATH="~/.npm-packages/lib/node_modules"
 
       # Setup brew
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-
-      # setup fly.io
-      export FLYCTL_INSTALL="/home/bondzula/.fly"
-      path+=('/home/bondzula/.fly/bin')
-
-      path+=('/home/bondzula/.local/bin')
+      if command -v /opt/homebrew/bin/brew &>/dev/null; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
 
       # Export path
       export PATH
@@ -48,7 +43,6 @@
 
     envExtra = ''
       export XDG_CACHE_HOME=~/.cache
-      export HISTFILE=~/.local/share/zsh/zsh_history
     '';
 
     plugins = [
