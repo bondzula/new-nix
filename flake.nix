@@ -10,6 +10,13 @@
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs: {
+    nixosConfigurations = {
+      "dublin" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./nixos/dublin.nix ];
+      };
+    };
+
     homeConfigurations = {
       "stefanbondzulic@hydrogen" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
