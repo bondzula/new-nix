@@ -15,10 +15,11 @@
   environment.systemPackages = with pkgs; [
     neovim
     git
-    zsh
   ];
 
   networking.hostName = "dublin";
+
+  programs.zsh.enable = true;
 
   users.users = {
     bondzula = {
