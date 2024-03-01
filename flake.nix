@@ -28,6 +28,14 @@
       };
 
       # Servers
+      "bondzula@rome" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home-manager/rome.nix
+        ];
+      };
+
       "bondzula@helsinki" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
