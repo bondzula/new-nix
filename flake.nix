@@ -36,6 +36,14 @@
         ];
       };
 
+      "bondzula@bern" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home-manager/bern.nix
+        ];
+      };
+
       "bondzula@helsinki" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
