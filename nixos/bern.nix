@@ -45,5 +45,9 @@
     };
   };
 
+  # Auto delete old generations
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 7d";
+
   system.stateVersion = "23.11";
 }
