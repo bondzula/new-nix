@@ -1,7 +1,12 @@
 { pkgs, modulesPath, ... }:
 
 {
-  imports = [ (modulesPath + "/virtualisation/lxc-container.nix") ];
+  imports = [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ];
+
+  proxmoxLXC = {
+    # manageNetwork = false;
+    # privileged = false;
+  };
 
   nix = {
     package = pkgs.nixFlakes;
@@ -13,6 +18,17 @@
   environment.systemPackages = with pkgs; [ neovim git ];
 
   networking.hostName = "bern";
+
+  services.openssh = {
+    enable = true;
+
+    # require public key authentication for better security
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 
   virtualisation.docker.enable = true;
 
