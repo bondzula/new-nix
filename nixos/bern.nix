@@ -15,7 +15,7 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; [ neovim git ];
+  environment.systemPackages = with pkgs; [ git ];
 
   networking.hostName = "bern";
 
@@ -33,6 +33,7 @@
   virtualisation.docker.enable = true;
 
   programs.zsh.enable = true;
+  programs.neovim.defaultEditor = true;
 
   users.users = {
     bondzula = {
