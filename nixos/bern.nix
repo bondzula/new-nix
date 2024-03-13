@@ -14,6 +14,8 @@
 
   networking.hostName = "bern";
 
+  virtualisation.docker.enable = true;
+
   programs.zsh.enable = true;
 
   users.users = {
@@ -22,7 +24,7 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIa8ipSFMoDgS8u+AVtxeokw5OB4DvF86GFcZAzJ74Lk stefanbondzulic@gmail.com"
       ];
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "docker" ];
       shell = pkgs.zsh;
     };
   };
