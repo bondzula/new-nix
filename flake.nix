@@ -16,6 +16,12 @@
       pkgs-stable = nixpkgs-stable.legacyPackages.aarch64-darwin;
     in {
       nixosConfigurations = {
+        "rome" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./nixos/proxmox-lxc.nix ];
+          specialArgs = { hostname = "rome"; };
+        };
+
         "bern" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./nixos/proxmox-lxc.nix ];
