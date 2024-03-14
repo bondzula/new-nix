@@ -22,6 +22,12 @@
           specialArgs = { hostname = "rome"; };
         };
 
+        "nairobi" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./nixos/proxmox-lxc.nix ];
+          specialArgs = { hostname = "nairobi"; };
+        };
+
         "bern" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./nixos/proxmox-lxc.nix ];
