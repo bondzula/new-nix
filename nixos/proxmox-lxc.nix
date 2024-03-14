@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, ... }:
+{ pkgs, modulesPath, hostname, ... }:
 
 {
   imports = [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ];
@@ -17,7 +17,7 @@
 
   environment.systemPackages = with pkgs; [ git ];
 
-  networking.hostName = "dublin";
+  networking.hostName = hostname;
 
   services.openssh = {
     enable = true;

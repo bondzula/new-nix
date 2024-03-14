@@ -18,12 +18,14 @@
       nixosConfigurations = {
         "bern" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./nixos/bern.nix ];
+          modules = [ ./nixos/proxmox-lxc.nix ];
+          specialArgs = { hostname = "bern"; };
         };
 
         "dublin" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./nixos/dublin.nix ];
+          modules = [ ./nixos/proxmox-lxc.nix ];
+          specialArgs = { hostname = "dublin"; };
         };
       };
 
