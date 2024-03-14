@@ -62,6 +62,12 @@
           modules = [ ./home-manager/rome.nix ];
         };
 
+        "bondzula@nairobi" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-manager/rome.nix ];
+        };
+
         "bondzula@bern" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; };
