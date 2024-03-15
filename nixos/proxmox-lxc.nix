@@ -1,8 +1,7 @@
 { pkgs, modulesPath, hostname, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ./caddy/default.nix ];
+  imports = [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ];
 
   proxmoxLXC = {
     # manageNetwork = false;
@@ -15,8 +14,6 @@
       experimental-features = nix-command flakes
     '';
   };
-
-  modules.caddy.enable = true;
 
   environment.systemPackages = with pkgs; [ git ];
 
@@ -31,6 +28,28 @@
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
     };
+  };
+
+  services.caddy = {
+    enable = true;
+    package = pkgs.callPackage ./caddy/custom-caddy.nix {
+      plugins = [
+        "github.com/mholt/caddy-l4"
+        "github.com/caddyserver/caddy/v2/modules/standard"
+        "github.com/hslatman/caddy-crowdsec-bouncer/http@main"
+        "github.com/hslatman/caddy-crowdsec-bouncer/layer4@main"
+        "github.com/caddy-dns/cloudflare"
+      ];
+    };
+
+    email = "stefanbondzulic@pm.me";
+
+    virtualHosts."jf-en.bg.droiden.xyz".extraConfig = ''
+      reverse_proxy 192.168.0.111:8096
+      tls {
+        dns cloudflare
+      }
+    '';
   };
 
   virtualisation.docker.enable = true;
