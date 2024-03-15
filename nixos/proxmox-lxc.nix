@@ -19,6 +19,11 @@
 
   networking.hostName = hostname;
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 ];
+  };
+
   services.openssh = {
     enable = true;
 
