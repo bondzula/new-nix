@@ -27,23 +27,10 @@ in {
       caddyMetricsPort
     ];
 
-    age.secrets."caddy-environment-file".file =
-      ../../secrets/caddy-environment-file.age;
-
     services.caddy = {
       enable = true;
       package = pkgs.callPackage ./custom-caddy.nix {
         plugins = [ "github.com/caddy-dns/cloudflare" ];
-      };
-    };
-
-    systemd.services.caddy = {
-      serviceConfig = {
-        # Required to use ports < 1024
-        AmbientCapabilities = "cap_net_bind_service";
-        CapabilityBoundingSet = "cap_net_bind_service";
-        EnvironmentFile = config.age.secrets."caddy-environment-file".path;
-        TimeoutStartSec = "5m";
       };
     };
   };
