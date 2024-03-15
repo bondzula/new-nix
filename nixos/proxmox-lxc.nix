@@ -1,7 +1,8 @@
 { pkgs, modulesPath, hostname, ... }:
 
 {
-  imports = [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ];
+  imports =
+    [ (modulesPath + "/virtualisation/proxmox-lxc.nix") ./caddy/default.nix ];
 
   proxmoxLXC = {
     # manageNetwork = false;
@@ -14,6 +15,8 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  modules.caddy.enable = true;
 
   environment.systemPackages = with pkgs; [ git ];
 
