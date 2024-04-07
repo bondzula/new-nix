@@ -14,30 +14,18 @@
     let
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
       pkgs-stable = nixpkgs-stable.legacyPackages.aarch64-darwin;
+
+      nixosModules = builtins.listToAttrs (map (module: {
+        name = module;
+        value = import (./modules + "/${module}");
+      }) (builtins.attrNames (builtins.readDir ./modules)));
     in {
       nixosConfigurations = {
-        "rome" = nixpkgs.lib.nixosSystem {
+        "berlin" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./nixos/proxmox-lxc.nix ];
-          specialArgs = { hostname = "rome"; };
-        };
-
-        "nairobi" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./nixos/proxmox-lxc.nix ];
-          specialArgs = { hostname = "nairobi"; };
-        };
-
-        "bern" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./nixos/proxmox-lxc.nix ];
-          specialArgs = { hostname = "bern"; };
-        };
-
-        "dublin" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./nixos/proxmox-lxc.nix ];
-          specialArgs = { hostname = "dublin"; };
+          modules =
+            [ ./nixos/berlin { imports = builtins.attrValues nixosModules; } ];
+          specialArgs = { hostname = "berlin"; };
         };
       };
 
@@ -56,34 +44,10 @@
         };
 
         # Servers
-        "bondzula@rome" = home-manager.lib.homeManagerConfiguration {
+        "bondzula@berlin" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/rome.nix ];
-        };
-
-        "bondzula@nairobi" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/rome.nix ];
-        };
-
-        "bondzula@bern" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/bern.nix ];
-        };
-
-        "bondzula@helsinki" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/helsinki.nix ];
-        };
-
-        "bondzula@oslo" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/oslo.nix ];
+          modules = [ ./home-manager/berlin.nix ];
         };
       };
     };
